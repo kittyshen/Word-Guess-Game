@@ -1,3 +1,5 @@
+/*basic styling page*/
+
 html{
     font-family: 'Arial', 'Helvetica Neue', Helvetica, sans-serif;
     line-height: 1.2;
@@ -7,7 +9,7 @@ html{
 }
 body{
     margin-bottom:90px;  /*important adding this margin if use "sticky footer" in bootstrap otherwise some content might get covered by footer space */
-    background-image:url("../images/polka-dots.png");
+    background-image:url("../images/circles-dark.png");
     min-height:100%;
 }
 
