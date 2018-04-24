@@ -16,12 +16,51 @@ Step 13. if guessCount = 0 then youLose varible ++ , pointer to step 2 and repea
 
 
 //testing various javasript function might be used in this assignment
-var wordBank=["one","three","they", "variable", "character", "function","number"]
-document.write (wordBank[4] + "<br>");
-document.write(wordBank[4].length + "<br>");
-var currentWordSplited = wordBank[4].split("");
-document.write (currentWordSplited +"<br>");
-document.write (currentWordSplited.length +"<br>");
-document.write(currentWordSplited[3]+"<br>");
-var randomNumber = Math.floor(Math.random()*10);
-document.write("The number "+(randomNumber+1), " letter in "+ wordBank[4] +" is letter " +   currentWordSplited[randomNumber]);
+//var wordBank=["one","three","they", "variable", "character", "function","number"]
+//document.write (wordBank[4] + "<br>");
+//document.write(wordBank[4].length + "<br>");
+//var currentWordSplited = wordBank[4].split("");
+//document.write (currentWordSplited +"<br>");
+//document.write (currentWordSplited.length +"<br>");
+//document.write(currentWordSplited[3]+"<br>");
+//var randomNumber = Math.floor(Math.random()*10);
+//document.write("The number "+(randomNumber+1), " letter in "+ wordBank[4] +" is letter " +   currentWordSplited[randomNumber]);
+
+var wordBank = ["one", "three", "they", "variable", "character", "function", "number", "letter", "movie", "horse", "kitten"]
+var randomNumber = Math.floor(Math.random() * 11); // get a random number from 0-9
+var currentWord = wordBank[randomNumber];
+var currentWordSplited = currentWord.split("");
+var letterCount = currentWordSplited.length;
+var guessCount = 10;
+var guessedWord = [];
+for (var i = 0; i < letterCount; i++) {
+    guessedWord[i] = "_ ";
+    document.getElementById("guessSection").innerHTML += guessedWord[i];
+}
+
+//check user input all letter, using regular expression to check user input
+function checkLetter(event) {
+    var userInput = event.key;
+    var validLetters = /^[A-Za-z]+$/;
+    if (userInput.match(validLetters)) {
+        return true;
+        guessCount--;
+    }
+    else {
+        alert('Please input alphabet characters only');
+        return false;
+    }
+}
+
+
+//document.write(translate);
+
+//var keycode = fromCharCode(userInput);
+//document.write (keycode);
+
+
+//for (var j = 0; j < letterCount; j++ )
+//document.write (guessedWord[j]);
+
+
+

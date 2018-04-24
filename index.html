@@ -7,16 +7,22 @@
     <title> Word Guess Game</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/style.css">
-    <script src = "assets/javascript/game.js"></script>
 </head>
 <body>
+    <div >This is a placecholder<p id="guessSection"></p></div>
+    <input id="inputSection" type="text" size="40" onkeypress="checkLetter(event)">
+
+    
+    
+    <!--make sure to put javascript on the bottom to alter the DOM, otherwise DOM not defined, can't call method or function-->
+    <script src = "assets/javascript/game.js"></script>
 
 </body>
 
 </html>
 
 
- <!--
+<!--
 <!DOCTYPE html>
 <html>
 
