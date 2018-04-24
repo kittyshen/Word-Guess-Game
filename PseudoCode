@@ -1,0 +1,20 @@
+Pseudocode your program and break the app down into tiny, manageable fragments. 
+This will make the coding process much less frustrating and a veritable Mach number faster. 
+Otherwise, you'll be chipping away at a giant chunk of abstraction for way too many hours.
+
+# Word-Guess-Game
+Pseudocode 
+
+Step 1. Create a word bank filled with at least 30 words. Build a array to store all those words
+Step 2. Use math Random to pick a number then point the index in the wordBank array to retrive the word for current game session, save it in a varible named currentWord.
+Step 3. get the length of the words it self by using string.length function? to be confirmed whether js has such function to call. otherwise need to write a function to calculate the string length using for loop.
+Step 4. Step . Create an array by splitting currentWord into another char array, using string.split()? store array in currentWordSplited[]
+Step 5. place n * "_" symbol on the game screen, where n = the length of the words we get on step 3.
+Step 6. initial the n*_ as a new array varible called guessedWord[].
+Step 7. take user input, store it in a varible called userInput, if the userInput isn't a character a-z, ask user input again. 
+Step 8. declare a varible called guessCount, initial it with game guess time allowrance. after user input an a-z char, guessCount--
+Step 9. If userInput is a char from a-z,loop search userInput in currentWordSplited[], return the index number of the match.
+Step 10. if find some match, assign the value of userInput into guessedWord[index].
+Step 11. loop whole process from step to here until two ending condition meet. 
+Step 12. if guessedWord is filled without any "_" left, then youWin varible ++  , pointer to step 2 and repeat
+Step 13. if guessCount = 0 then youLose varible ++ , pointer to step 2 and repeat.
