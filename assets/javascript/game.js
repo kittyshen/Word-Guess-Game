@@ -33,18 +33,48 @@ var currentWordSplited = currentWord.split("");
 var letterCount = currentWordSplited.length;
 var guessCount = 10;
 var guessedWord = [];
+
+//initial the guessedWord array with all "_ "
 for (var i = 0; i < letterCount; i++) {
     guessedWord[i] = "_ ";
-    document.getElementById("guessSection").innerHTML += guessedWord[i];
+  //  document.getElementById("guessSection").innerHTML += guessedWord[i];
 }
+function printCurrent(aArray){
+    document.getElementById("guessSection").innerHTML = ""; // reset before printing
+    for (var i = 0; i < aArray.length; i++) {
+        document.getElementById("guessSection").innerHTML += aArray[i];
+    }
+}
+printCurrent(guessedWord);
+console.log(guessCount);
 
 //check user input all letter, using regular expression to check user input
 function checkLetter(event) {
     var userInput = event.key;
     var validLetters = /^[A-Za-z]+$/;
     if (userInput.match(validLetters)) {
-        return true;
         guessCount--;
+        console.log(guessCount);
+        console.log("debug-cheat: target word is " + currentWord);
+
+        //if user have't reach the max number of guess try, do the loop check with the user inputed letter.
+        if(guessCount>0){
+            for( var j = 0 ; j<letterCount; j++ ){ //check user input start here
+                if(userInput == currentWordSplited[j]){
+                    guessedWord[j] = userInput;
+                    printCurrent(guessedWord); // everytime find a matched letter redo current guess progress printing on DOM
+                }
+                if (guessedWord.indexOf("_ ") == -1){  // check winning condition met or not,which means the guessedWord don't contain any initial "_ "
+                    document.getElementById("status").innerHTML = "you Win! ";
+                }
+            }
+        }
+        else{
+            document.getElementById("status").innerHTML = "you lose! ";
+            guessCount =10;
+        }
+
+        return true;
     }
     else {
         alert('Please input alphabet characters only');
@@ -52,15 +82,6 @@ function checkLetter(event) {
     }
 }
 
-
-//document.write(translate);
-
-//var keycode = fromCharCode(userInput);
-//document.write (keycode);
-
-
-//for (var j = 0; j < letterCount; j++ )
-//document.write (guessedWord[j]);
 
 
 
