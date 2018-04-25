@@ -15,7 +15,9 @@ Step 12. if guessedWord is filled without any "_" left, then youWin varible ++  
 Step 13. if guessCount = 0 then youLose varible ++ , pointer to step 2 and repeat.*/
 
 
-var wordBank = ["one", "three", "they", "variable", "character", "function", "number", "letter", "movie", "horse", "kitten"]
+var wordBank = ["one", "three", "they", "variable", "character", "function", "number", "letter", 
+"movie", "horse", "kitten","returns","new", "string", "with", "people","button","document",
+"total", "amount", "sales","basic", "cable", "frog", "television", "channel","pork","bracket"]
 var randomNumber =0; // get a random number from 0-10
 var currentWord = "";
 var currentWordSplited = [];
@@ -81,16 +83,24 @@ document.onkeyup = function(event) {
                     printCurrent(guessedWord); // everytime find a matched letter redo current guess progress printing on DOM
                 }
                 if (guessedWord.indexOf("_ ") == -1){  // check winning condition met or not,which means the guessedWord don't contain any initial "_ "
-    
-                    alert("You guessed the right word: "+ currentWord);
+                    console.log(guessedWord);
+                    printCurrent(guessedWord); 
 
+                    alert("You guessed the right word: "+ currentWord);
                     win ++;
                     document.getElementById("statusWin").innerHTML = " Win: " + win;
+
                     //winning condition meet start another section
-                    guessCount =10;
-                    letterUsed.textContent = ""; 
-                    letterUsedArray = [];
-                    pickWord();
+                    // adding confirm to another game to avoid overlapping of two game session.
+                    var onemore = confirm("Try another round?");
+                    if(onemore){
+                        pickWord();
+                        guessCount =10;
+                        letterUsed.textContent = ""; 
+                        letterUsedArray = [];
+                    }
+                    else break;  // use to break out of the keyup event.
+                    
                 }
             }
             guessCount--;
