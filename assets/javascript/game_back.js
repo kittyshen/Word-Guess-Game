@@ -54,7 +54,10 @@ console.log(guessCount);
     var letterUsedArray = []; //declare a array to store the letter user already used
 
     // Next, give JavaScript a function to execute when onkeyup event fires.
+while(guessCount >= 0){
 
+    
+}
 document.onkeyup = function(event) {
     var userInput = event.key;
     userTyped.textContent = userInput; //change html userTyping element to what user just typed.
@@ -63,32 +66,33 @@ document.onkeyup = function(event) {
     if (userInput.match(validLetters)) {
         //then check whether user input already in the letterUsed array.
         if(letterUsedArray.indexOf(userInput) == -1 ){
-            
             letterUsedArray.push(userInput); // store user inputed letter if it's not in the letterUsedArray
             console.log (letterUsedArray);
+            guessCount--;
             document.getElementById("guessLeft").innerHTML = guessCount;
+            
             letterUsed.textContent += userInput.toUpperCase()+","; 
             console.log(guessCount);
+
             console.log("debug-cheat: target word is " + currentWord);
 
-            //do the loop check with the user inputed letter.
-            for(var j = 0 ; j<letterCount; j++ ){ //check user input start here
-                if(userInput  == currentWordSplited[j]){
-                    guessedWord[j] = userInput;
-                    printCurrent(guessedWord); // everytime find a matched letter redo current guess progress printing on DOM
-                }
-                if (guessedWord.indexOf("_ ") == -1){  // check winning condition met or not,which means the guessedWord don't contain any initial "_ "
-                    document.getElementById("status").innerHTML = "you Win! ";
-                    break;
+            //if user have't reach the max number of guess try, do the loop check with the user inputed letter.
+            if(guessCount> 0){
+                for( var j = 0 ; j<letterCount; j++ ){ //check user input start here
+                    if(userInput  == currentWordSplited[j]){
+                        guessedWord[j] = userInput;
+                        printCurrent(guessedWord); // everytime find a matched letter redo current guess progress printing on DOM
+                    }
+                    if (guessedWord.indexOf("_ ") == -1){  // check winning condition met or not,which means the guessedWord don't contain any initial "_ "
+                        document.getElementById("status").innerHTML = "you Win! ";
+                    }
                 }
             }
-            guessCount--;
-            //if user reached the max number of guess try, 
-            if(guessCount< 0){
+            else{
                 document.getElementById("status").innerHTML = "you lose! ";
                 guessCount =10;
+                printCurrent(guessedWord); 
             }
-           
         }
         else{
             alert('You already typed '+ userInput );
