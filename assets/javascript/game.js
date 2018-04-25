@@ -15,30 +15,35 @@ Step 12. if guessedWord is filled without any "_" left, then youWin varible ++  
 Step 13. if guessCount = 0 then youLose varible ++ , pointer to step 2 and repeat.*/
 
 
-//testing various javasript function might be used in this assignment
-//var wordBank=["one","three","they", "variable", "character", "function","number"]
-//document.write (wordBank[4] + "<br>");
-//document.write(wordBank[4].length + "<br>");
-//var currentWordSplited = wordBank[4].split("");
-//document.write (currentWordSplited +"<br>");
-//document.write (currentWordSplited.length +"<br>");
-//document.write(currentWordSplited[3]+"<br>");
-//var randomNumber = Math.floor(Math.random()*10);
-//document.write("The number "+(randomNumber+1), " letter in "+ wordBank[4] +" is letter " +   currentWordSplited[randomNumber]);
-
 var wordBank = ["one", "three", "they", "variable", "character", "function", "number", "letter", "movie", "horse", "kitten"]
-var randomNumber = Math.floor(Math.random() * 11); // get a random number from 0-10
-var currentWord = wordBank[randomNumber];
-var currentWordSplited = currentWord.split("");
-var letterCount = currentWordSplited.length;
-var guessCount = 10;
+var randomNumber =0; // get a random number from 0-10
+var currentWord = "";
+var currentWordSplited = [];
+var letterCount = 0;
+var guessCount = 0;
 var guessedWord = [];
+var win = 0;
+var lose = 0;
 
-//initial the guessedWord array with all "_ "
-for (var i = 0; i < letterCount; i++) {
-    guessedWord[i] = "_ ";
-  //  document.getElementById("guessSection").innerHTML += guessedWord[i];
+// define a function to pick a new word from the wordbank
+function pickWord(){
+    randomNumber = Math.floor(Math.random() * 11);
+    currentWord = wordBank[randomNumber];
+    currentWordSplited = currentWord.split("");
+    letterCount = currentWordSplited.length;
+    guessCount = 10;
+    guessedWord = [];
+    //initial the guessedWord array with all "_ "
+    for (var i = 0; i < letterCount; i++) {
+        guessedWord[i] = "_ ";
+      //  document.getElementById("guessSection").innerHTML += guessedWord[i];
+    }
+    console.log("currentWord =" +currentWord );
+    printCurrent(guessedWord);
 }
+
+// call the function to initial the game screen
+pickWord();
 function printCurrent(aArray){
     document.getElementById("guessSection").innerHTML = ""; // reset before printing
     for (var i = 0; i < aArray.length; i++) {
@@ -63,12 +68,10 @@ document.onkeyup = function(event) {
     if (userInput.match(validLetters)) {
         //then check whether user input already in the letterUsed array.
         if(letterUsedArray.indexOf(userInput) == -1 ){
-            
             letterUsedArray.push(userInput); // store user inputed letter if it's not in the letterUsedArray
             console.log (letterUsedArray);
-            document.getElementById("guessLeft").innerHTML = guessCount;
+            document.getElementById("guessLeft").innerHTML = guessCount-1;
             letterUsed.textContent += userInput.toUpperCase()+","; 
-            console.log(guessCount);
             console.log("debug-cheat: target word is " + currentWord);
 
             //do the loop check with the user inputed letter.
@@ -78,15 +81,28 @@ document.onkeyup = function(event) {
                     printCurrent(guessedWord); // everytime find a matched letter redo current guess progress printing on DOM
                 }
                 if (guessedWord.indexOf("_ ") == -1){  // check winning condition met or not,which means the guessedWord don't contain any initial "_ "
-                    document.getElementById("status").innerHTML = "you Win! ";
-                    break;
+    
+                    alert("You guessed the right word: "+ currentWord);
+
+                    win ++;
+                    document.getElementById("statusWin").innerHTML = " Win: " + win;
+                    //winning condition meet start another section
+                    guessCount =10;
+                    letterUsed.textContent = ""; 
+                    letterUsedArray = [];
+                    pickWord();
                 }
             }
             guessCount--;
             //if user reached the max number of guess try, 
-            if(guessCount< 0){
-                document.getElementById("status").innerHTML = "you lose! ";
+            if(guessCount<= 0){
+                lose++;
+                document.getElementById("statusLose").innerHTML = "Lose: "+lose;
+                //losing condition meet start another section  
                 guessCount =10;
+                letterUsedArray = [];
+                letterUsed.textContent = ""; 
+                pickWord();
             }
            
         }

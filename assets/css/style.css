@@ -150,6 +150,9 @@ textarea{
 .col-lg-6{
     float:left;
 }
+.jumbotron {
+    padding:1.5em;
+}
 
 @media (min-width: 400px) {
     .navbar-nav {

@@ -12,10 +12,18 @@
 
 <body>
     <div class="container">
+            <h5>press any key to get started</h5>
         <div class="row">
-            <div class="col-md-offset-2 col-md-8">
+            <div class=" col-md-4">
+                    <!--Showing the winning or lose status-->
+                    <div class="jumbotron">
+                        <p id="statusWin">Win: 0</p>
+                        <p id="statusLose">Lose: 0</p>
+                    </div>
+            </div>
+            <div class="col-md-8">
                 <!--Showing the current guess status-->
-                <p>press any key to get started</p>
+                
                 <div class="jumbotron">
                     <div>The word you are guessing:
                         <p id="guessSection"></p>
@@ -25,7 +33,6 @@
                 <!--Showing user inputs
                 <input id="inputSection" type="text" size="40" onkeypress="checkLetter(event)">
                 -->
-
                 <!--Showing the number of remaining guess-->
                 <div>
                         Remaining guess count: <p id="guessLeft"></p>
@@ -40,12 +47,9 @@
                         <p id="userTyping"></p>
                     </div>
                 </div>
-                <!--Showing the winning or lose status-->
-                <div>
-                    <p id="status"></p>
-                </div>
 
             </div>
+            
         </div>
     </div>
 
