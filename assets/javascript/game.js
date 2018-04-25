@@ -10,7 +10,7 @@ Step 7. take user input, store it in a varible called userInput, if the userInpu
 Step 8. declare a varible called guessCount, initial it with game guess time allowrance. after user input an a-z char, guessCount--
 Step 9. If userInput is a char from a-z,loop search userInput in currentWordSplited[], return the index number of the match.
 Step 10. if find some match, assign the value of userInput into guessedWord[index].
-Step 11. loop whole process from step to here until two ending condition meet. 
+Step 11. loop whole process from step 7 to here until two ending condition meet. 
 Step 12. if guessedWord is filled without any "_" left, then youWin varible ++  , pointer to step 2 and repeat
 Step 13. if guessCount = 0 then youLose varible ++ , pointer to step 2 and repeat.*/
 
@@ -27,7 +27,7 @@ Step 13. if guessCount = 0 then youLose varible ++ , pointer to step 2 and repea
 //document.write("The number "+(randomNumber+1), " letter in "+ wordBank[4] +" is letter " +   currentWordSplited[randomNumber]);
 
 var wordBank = ["one", "three", "they", "variable", "character", "function", "number", "letter", "movie", "horse", "kitten"]
-var randomNumber = Math.floor(Math.random() * 11); // get a random number from 0-9
+var randomNumber = Math.floor(Math.random() * 11); // get a random number from 0-10
 var currentWord = wordBank[randomNumber];
 var currentWordSplited = currentWord.split("");
 var letterCount = currentWordSplited.length;
@@ -47,41 +47,46 @@ function printCurrent(aArray){
 }
 printCurrent(guessedWord);
 console.log(guessCount);
+    
+    //set two pointer var pointing to the elements in DOM we want to modify for easy access
+    var  userTyped = document.getElementById("userTyping");
+    var letterUsed = document.getElementById("letterAlreadyUsed");
 
-//check user input all letter, using regular expression to check user input
-function checkLetter(event) {
-    var userInput = event.key;
-    var validLetters = /^[A-Za-z]+$/;
-    if (userInput.match(validLetters)) {
-        guessCount--;
-        console.log(guessCount);
-        console.log("debug-cheat: target word is " + currentWord);
+    // Next, give JavaScript a function to execute when onkeyup event fires.
+    document.onkeyup = function(event) {
+        var userInput = event.key;
+        userTyped.textContent = userInput; //change html userTyping element to what user just typed.
+        var validLetters = /^[A-Za-z]+$/;
+        if (userInput.match(validLetters)) {
+            
+            document.getElementById("guessLeft").innerHTML = "Remaining guess count: "+guessCount;
+            guessCount--;
+            letterUsed.textContent += userInput.toUpperCase()+","; 
+            console.log(guessCount);
 
-        //if user have't reach the max number of guess try, do the loop check with the user inputed letter.
-        if(guessCount>0){
-            for( var j = 0 ; j<letterCount; j++ ){ //check user input start here
-                if(userInput == currentWordSplited[j]){
-                    guessedWord[j] = userInput;
-                    printCurrent(guessedWord); // everytime find a matched letter redo current guess progress printing on DOM
-                }
-                if (guessedWord.indexOf("_ ") == -1){  // check winning condition met or not,which means the guessedWord don't contain any initial "_ "
-                    document.getElementById("status").innerHTML = "you Win! ";
+            console.log("debug-cheat: target word is " + currentWord);
+
+            //if user have't reach the max number of guess try, do the loop check with the user inputed letter.
+            if(guessCount>0){
+                for( var j = 0 ; j<letterCount; j++ ){ //check user input start here
+                    if(userInput  == currentWordSplited[j]){
+                        guessedWord[j] = userInput;
+                        printCurrent(guessedWord); // everytime find a matched letter redo current guess progress printing on DOM
+                    }
+                    if (guessedWord.indexOf("_ ") == -1){  // check winning condition met or not,which means the guessedWord don't contain any initial "_ "
+                        document.getElementById("status").innerHTML = "you Win! ";
+                    }
                 }
             }
+            else{
+                document.getElementById("status").innerHTML = "you lose! ";
+                guessCount =10;
+                printCurrent(guessedWord); 
+            }
+
         }
-        else{
-            document.getElementById("status").innerHTML = "you lose! ";
-            guessCount =10;
+        else {
+            alert('Please input alphabet characters only');
         }
-
-        return true;
     }
-    else {
-        alert('Please input alphabet characters only');
-        return false;
-    }
-}
-
-
-
-
+ 

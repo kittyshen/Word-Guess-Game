@@ -15,6 +15,6 @@ Step 7. take user input, store it in a varible called userInput, if the userInpu
 Step 8. declare a varible called guessCount, initial it with game guess time allowrance. after user input an a-z char, guessCount--
 Step 9. If userInput is a char from a-z,loop search userInput in currentWordSplited[], return the index number of the match.
 Step 10. if find some match, assign the value of userInput into guessedWord[index].
-Step 11. loop whole process from step to here until two ending condition meet. 
+Step 11. loop whole process from step 7 to here until two ending condition meet. 
 Step 12. if guessedWord is filled without any "_" left, then youWin varible ++  , pointer to step 2 and repeat
 Step 13. if guessCount = 0 then youLose varible ++ , pointer to step 2 and repeat.
