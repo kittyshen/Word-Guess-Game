@@ -26,10 +26,14 @@ var guessCount = 0;
 var guessedWord = [];
 var win = 0;
 var lose = 0;
+var letterUsedArray = []; //declare a array to store the letter user already used
+var userTyped = document.getElementById("userTyping");
+var letterUsed = document.getElementById("letterAlreadyUsed");
+
 
 // define a function to pick a new word from the wordbank
 function pickWord(){
-    randomNumber = Math.floor(Math.random() * 11);
+    randomNumber = Math.floor(Math.random() * wordBank.length);
     currentWord = wordBank[randomNumber];
     currentWordSplited = currentWord.split("");
     letterCount = currentWordSplited.length;
@@ -42,6 +46,10 @@ function pickWord(){
     }
     console.log("currentWord =" +currentWord );
     printCurrent(guessedWord);
+    letterUsed.textContent = ""; 
+    letterUsedArray = [];
+    guessCount =10;
+    document.getElementById("guessLeft").innerHTML = guessCount;
 }
 
 // call the function to initial the game screen
@@ -52,14 +60,10 @@ function printCurrent(aArray){
         document.getElementById("guessSection").innerHTML += aArray[i];
     }
 }
-printCurrent(guessedWord);
-console.log(guessCount);
+
     
     //set two pointer var pointing to the elements in DOM we want to modify for easy access
-    var  userTyped = document.getElementById("userTyping");
-    var letterUsed = document.getElementById("letterAlreadyUsed");
-    var letterUsedArray = []; //declare a array to store the letter user already used
-
+ 
     // Next, give JavaScript a function to execute when onkeyup event fires.
 
 document.onkeyup = function(event) {
@@ -71,7 +75,7 @@ document.onkeyup = function(event) {
         //then check whether user input already in the letterUsed array.
         if(letterUsedArray.indexOf(userInput) == -1 ){
             letterUsedArray.push(userInput); // store user inputed letter if it's not in the letterUsedArray
-            console.log (letterUsedArray);
+            //console.log (letterUsedArray);
             document.getElementById("guessLeft").innerHTML = guessCount-1;
             letterUsed.textContent += userInput.toUpperCase()+","; 
             console.log("debug-cheat: target word is " + currentWord);
@@ -85,7 +89,6 @@ document.onkeyup = function(event) {
                 if (guessedWord.indexOf("_ ") == -1){  // check winning condition met or not,which means the guessedWord don't contain any initial "_ "
                     console.log(guessedWord);
                     printCurrent(guessedWord); 
-
                     alert("You guessed the right word: "+ currentWord);
                     win ++;
                     document.getElementById("statusWin").innerHTML = " Win: " + win;
@@ -95,23 +98,25 @@ document.onkeyup = function(event) {
                     var onemore = confirm("Try another round?");
                     if(onemore){
                         pickWord();
-                        guessCount =10;
-                        letterUsed.textContent = ""; 
-                        letterUsedArray = [];
+                        break;
                     }
-                    else break;  // use to break out of the keyup event.
+                    else break;  // use to break out of the onkeyup event.
                     
                 }
             }
             guessCount--;
+            console.log(userInput + ":" +currentWordSplited.indexOf(userInput));
+             // add this to avoid guessCount reduce while user enter the right letter in the target word.  
+            if(currentWordSplited.indexOf(userInput) != -1){         
+                guessCount++;
+                document.getElementById("guessLeft").innerHTML = guessCount; // use this to show change on guesscount immediately
+            }
+
             //if user reached the max number of guess try, 
             if(guessCount<= 0){
                 lose++;
                 document.getElementById("statusLose").innerHTML = "Lose: "+lose;
                 //losing condition meet start another section  
-                guessCount =10;
-                letterUsedArray = [];
-                letterUsed.textContent = ""; 
                 pickWord();
             }
            
