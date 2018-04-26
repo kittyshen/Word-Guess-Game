@@ -11,6 +11,7 @@ body{
     margin-bottom:90px;  /*important adding this margin if use "sticky footer" in bootstrap otherwise some content might get covered by footer space */
     background-image:url("../images/circles-dark.png");
     min-height:100%;
+    color:white;
 }
 
 h2{
@@ -110,74 +111,31 @@ textarea{
 }
 
 /* adjust bootstrap elements to mimic the assignment format*/
-
-.nav-link{
-    color: orange !important;
-    font-size: 1.2em;
-}
-.navbar-brand{
-    background-color: orange ;
-    color: white !important;
-    font-size: 2.4em;
-    font-family: 'Times New Roman', Times, serif;
-    padding: 0.3em 0.5em;
-    margin-bottom:-10px;
-    margin-left:10px;
-    border-top:2px solid rgb(252, 186, 63);
-    border-left:2px solid rgb(248, 197, 101);
-    border-right:2px solid rgba(36, 36, 36, 0.76);
-    border-bottom:2px solid rgba(36, 36, 36, 0.76);
-    border-top-left-radius:1.2em;
-    box-shadow: 4px 2px 4px rgb(48, 48, 48);
+.badge-primary{
     text-align: center;
-}
-.navbar{
-    background-color: rgb(80, 80, 80) !important;
-}
-.navbar-toggler-icon{
-    background-color: orange;
-    width:2em;
-    height:2em;
-}
-.navbar-toggler{
-    background-color: orange !important;
+    padding-left: 1em;
+    background-color: #2d3391;
 }
 .row{
     padding:1em;
     margin-top: 2em;
     background-color:rgba(211, 211, 211, 0.85)
 }
-.col-lg-6{
-    float:left;
+.col-md-4 > .jumbotron {
+    height:330px;
+}
+.col-sm-12 > .jumbotron {
+    height:100px;
 }
 .jumbotron {
     padding:1.5em;
+    background-color:#2d3491f3!important;
+}
+.row{
+    margin: 0 auto;
+    background-image:url("../images/nintendo-mario.gif"); 
 }
 
-@media (min-width: 400px) {
-    .navbar-nav {
-      width: 100%;
-      text-align: center;
-    }
-    .navbar-nav > li {
-      float: none;
-      display: inline-block;
-    }
-    .navbar-nav > li.nav-item {
-      float: right !important;
-    }
-}
-@media (min-width:992px){
 
-    .navbar-nav, .navbar-nav > li, .navbar-nav > li.nav-item, li.nav-item > a.nav-link{
-    float:right !important;
-    display: block;
-    position: relative;
-    margin-right:3%;
-
-    }
-}
-
-/* adjust bootstrap elements to mimic the assignment format*/
 
 

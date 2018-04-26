@@ -12,9 +12,14 @@
 
 <body>
     <div class="container">
-            <h5>press any key to get started</h5>
+        <div class = "col-md-12 badge badge-primary">
+            <h1 >Hangman the game</h1>
+        </div>
         <div class="row">
-            <div class=" col-md-4">
+                <h3>press any key to get started</h3>
+        </div>
+        <div class="row">
+            <div class=" col-md-4 col-sm-12">
                     <!--Showing the winning or lose status-->
                     <div class="jumbotron">
                         <p id="statusWin">Win: 0</p>
@@ -34,7 +39,7 @@
                 <input id="inputSection" type="text" size="40" onkeypress="checkLetter(event)">
                 -->
                 <!--Showing the number of remaining guess-->
-                <div>
+                <div class="jumbotron">
                         Remaining guess count: <p id="guessLeft"></p>
                 </div>
 
