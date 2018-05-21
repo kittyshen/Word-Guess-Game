@@ -13,7 +13,7 @@ UC Berkeley coding assignment 3
 7. Letters Already Guessed: (Letters the user has guessed, displayed like `L Z Y H`).
 8. After the user wins/loses the game should automatically choose another word and make the user play it.
 
-##Technology used
+## Technology used
 JavaScript, Html, Css, Bootstrap framework.
 
 ## Key learning points

@@ -77,7 +77,7 @@ document.onkeyup = function(event) {
             letterUsedArray.push(userInput); // store user inputed letter if it's not in the letterUsedArray
             //console.log (letterUsedArray);
             document.getElementById("guessLeft").innerHTML = guessCount-1;
-            letterUsed.textContent += userInput.toUpperCase()+","; 
+            letterUsed.textContent += userInput.toUpperCase()+", "; 
             console.log("debug-cheat: target word is " + currentWord);
 
             //do the loop check with the user inputed letter.
